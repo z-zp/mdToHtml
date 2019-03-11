@@ -3,12 +3,482 @@
 <head>
 <meta charset="UTF-8">
 <title>Md to Html</title>
+<link href="../hljs.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js" integrity="sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
-    <h3 id="标题">标题</h3>
-<h4 id="标题2">标题2</h4>
-<p>你好</p>
+    <h1 id="javsscript-">JavsScript 算法</h1>
+<p>一些简单又有趣的jacaScript算法，让锈逗的脑壳转起来。
+<a href="https://github.com/trekhleb/javascript-algorithms/blob/master/README.zh-CN.md">更多JavaScript 算法与数据结构</a></p>
+<h2 id="-">排序</h2>
+<table class="table"><tr>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+</tr>
+<tr>
+<td>A1</td>
+<td>B1</td>
+<td>C1</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>B2</td>
+<td>C2</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>B3</td>
+<td>C3</td>
+</tr>
+</table><h3 id="-">冒泡排序</h3>
+<pre><code>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bubbleSort</span><span class="hljs-params">(arr)</span> </span>{
+    <span class="hljs-keyword">var</span> i = arr.length<span class="hljs-number">-1</span>;  <span class="hljs-comment">//初始时,最后位置保持不变</span>
+    <span class="hljs-keyword">while</span> ( i&gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">var</span> pos= <span class="hljs-number">0</span>; <span class="hljs-comment">//每趟开始时,无记录交换</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j= <span class="hljs-number">0</span>; j&lt; i; j++)
+            <span class="hljs-keyword">if</span> (arr[j]&gt; arr[j+<span class="hljs-number">1</span>]) {
+                pos= j; <span class="hljs-comment">//记录交换的位置</span>
+                <span class="hljs-keyword">var</span> tmp = arr[j]; arr[j]=arr[j+<span class="hljs-number">1</span>];arr[j+<span class="hljs-number">1</span>]=tmp;
+            }
+        i= pos; <span class="hljs-comment">//为下一趟排序作准备</span>
+     }
+     <span class="hljs-keyword">return</span> arr;
+}</code></pre><p> <img src="http://upload-images.jianshu.io/upload_images/9809555-c45a843e156b3e7b?imageMogr2/auto-orient/strip" alt="冒泡排序"> </p>
+<h3 id="-">选择排序</h3>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">selectionSort</span><span class="hljs-params">(arr)</span> </span>{
+    <span class="hljs-keyword">var</span> len = arr.length;
+    <span class="hljs-keyword">var</span> minIndex, temp;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; len - <span class="hljs-number">1</span>; i++) {
+        minIndex = i;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = i + <span class="hljs-number">1</span>; j &lt; len; j++) {
+            <span class="hljs-keyword">if</span> (arr[j] &lt; arr[minIndex]) {     <span class="hljs-comment">//寻找最小的数</span>
+                minIndex = j;                 <span class="hljs-comment">//将最小数的索引保存</span>
+            }
+        }
+        temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+    <span class="hljs-keyword">return</span> arr;
+}
+</code></pre><p> <img src="http://upload-images.jianshu.io/upload_images/9809555-403db33779ae29b9?imageMogr2/auto-orient/strip" alt="选择排序"> </p>
+<h3 id="-">插入排序</h3>
+<pre><code>function binaryInsertionSort(<span class="hljs-built_in">array</span>) {
+    <span class="hljs-keyword">if</span> (Object.prototype.toString.call(<span class="hljs-built_in">array</span>).slice(<span class="hljs-number">8</span>, -<span class="hljs-number">1</span>) === 'Array') {
+        console.<span class="hljs-built_in">time</span>('二分插入排序耗时：');
 
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">var</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-built_in">array</span>.<span class="hljs-built_in">length</span>; i++) {
+            <span class="hljs-built_in">var</span> <span class="hljs-built_in">key</span> = <span class="hljs-built_in">array</span>[i], left = <span class="hljs-number">0</span>, right = i - <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">while</span> (left &lt;= right) {
+                <span class="hljs-built_in">var</span> middle = parseInt((left + right) / <span class="hljs-number">2</span>);
+                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">key</span> &lt; <span class="hljs-built_in">array</span>[middle]) {
+                    right = middle - <span class="hljs-number">1</span>;
+                } <span class="hljs-keyword">else</span> {
+                    left = middle + <span class="hljs-number">1</span>;
+                }
+            }
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">var</span> j = i - <span class="hljs-number">1</span>; j &gt;= left; j--) {
+                <span class="hljs-built_in">array</span>[j + <span class="hljs-number">1</span>] = <span class="hljs-built_in">array</span>[j];
+            }
+            <span class="hljs-built_in">array</span>[left] = <span class="hljs-built_in">key</span>;
+        }
+        console.timeEnd('二分插入排序耗时：');
+
+        <span class="hljs-built_in">return</span> <span class="hljs-built_in">array</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">return</span> '<span class="hljs-built_in">array</span> <span class="hljs-built_in">is</span> <span class="hljs-keyword">not</span> an Array!';
+    }
+}</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/9809555-285d9750df8245f9?imageMogr2/auto-orient/strip" alt="插入排序"></p>
+<h3 id="-">快速排序</h3>
+<pre><code><span class="hljs-built_in">var</span> quickSort = function(arr) {
+　　<span class="hljs-keyword">if</span> (arr.<span class="hljs-built_in">length</span> &lt;= <span class="hljs-number">1</span>) { <span class="hljs-built_in">return</span> arr; }
+　　<span class="hljs-built_in">var</span> pivotIndex = Math.<span class="hljs-built_in">floor</span>(arr.<span class="hljs-built_in">length</span> / <span class="hljs-number">2</span>);
+　　<span class="hljs-built_in">var</span> pivot = arr.<span class="hljs-built_in">splice</span>(pivotIndex, <span class="hljs-number">1</span>)[<span class="hljs-number">0</span>];
+　　<span class="hljs-built_in">var</span> left = [];
+　　<span class="hljs-built_in">var</span> right = [];
+　　<span class="hljs-keyword">for</span> (<span class="hljs-built_in">var</span> i = <span class="hljs-number">0</span>; i &lt; arr.<span class="hljs-built_in">length</span>; i++){
+　　　　<span class="hljs-keyword">if</span> (arr[i] &lt; pivot) {
+　　　　　　left.<span class="hljs-built_in">push</span>(arr[i]);
+　　　　} <span class="hljs-keyword">else</span> {
+　　　　　　right.<span class="hljs-built_in">push</span>(arr[i]);
+　　　　}
+　　}
+　　<span class="hljs-built_in">return</span> quickSort(left).<span class="hljs-built_in">concat</span>([pivot], quickSort2(right));
+};</code></pre><p> <img src="http://upload-images.jianshu.io/upload_images/9809555-5b0e2d10e2dc6a2b?imageMogr2/auto-orient/strip" alt="快速排序"></p>
+<h2 id="-2s-">质数(千万2s)</h2>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prime</span><span class="hljs-params">(n)</span>{</span>
+  let time = Date.now()
+  let Memo = Array(n).fill(<span class="hljs-number">-1</span>)
+  let <span class="hljs-built_in">sqrt</span> = Math.<span class="hljs-built_in">ceil</span>(Math.<span class="hljs-built_in">sqrt</span>(n))
+  let res = []
+  <span class="hljs-keyword">for</span>(let <span class="hljs-built_in">i</span> = <span class="hljs-number">2</span>;<span class="hljs-built_in">i</span>&lt;=<span class="hljs-built_in">sqrt</span>;<span class="hljs-built_in">i</span>++){
+    <span class="hljs-keyword">if</span>(Memo[<span class="hljs-built_in">i</span>]===<span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>
+    <span class="hljs-keyword">for</span>(let <span class="hljs-built_in">j</span>=<span class="hljs-number">2</span>;<span class="hljs-built_in">j</span>&lt;= n/<span class="hljs-built_in">i</span>;<span class="hljs-built_in">j</span>++){
+      <span class="hljs-keyword">if</span>(Memo[<span class="hljs-built_in">i</span>*<span class="hljs-built_in">j</span>] === <span class="hljs-number">-1</span>){
+        Memo[<span class="hljs-built_in">i</span>*<span class="hljs-built_in">j</span>] = <span class="hljs-number">1</span>
+      }
+    }
+  }
+  <span class="hljs-keyword">for</span>(let <span class="hljs-built_in">i</span>=<span class="hljs-number">2</span>;<span class="hljs-built_in">i</span>&lt;=n;<span class="hljs-built_in">i</span>++){
+    Memo[<span class="hljs-built_in">i</span>] === <span class="hljs-number">-1</span> &amp;&amp; res.push(<span class="hljs-built_in">i</span>)
+  }
+  console.<span class="hljs-built_in">log</span>(Date.now()-time)
+  <span class="hljs-keyword">return</span> res
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/9809555-595aff81b6cd18ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="-fibonacci-sequence-">斐波那契数列(Fibonacci sequence)</h2>
+<pre><code>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fibonacciClosedForm</span>(<span class="hljs-params">position</span>) </span>{
+  <span class="hljs-keyword">const</span> topMaxValidPosition = <span class="hljs-number">75</span>;
+  <span class="hljs-keyword">if</span> (position &lt; <span class="hljs-number">1</span> || position &gt; topMaxValidPosition) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Can't handle position smaller than 1 or greater than <span class="hljs-subst">${topMaxValidPosition}</span>`</span>);
+  }
+  <span class="hljs-keyword">const</span> sqrt5 = <span class="hljs-built_in">Math</span>.sqrt(<span class="hljs-number">5</span>);
+  <span class="hljs-keyword">const</span> phi = (<span class="hljs-number">1</span> + sqrt5) / <span class="hljs-number">2</span>;
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.floor((phi ** position) / sqrt5 + <span class="hljs-number">0.5</span>);
+}
+<span class="hljs-comment">// 动态规划</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fibonacciNth</span>(<span class="hljs-params">n</span>) </span>{
+  <span class="hljs-keyword">let</span> currentValue = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">let</span> previousValue = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">if</span> (n === <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  }
+  <span class="hljs-keyword">let</span> iterationsCounter = n - <span class="hljs-number">1</span>;
+
+  <span class="hljs-keyword">while</span> (iterationsCounter) {
+    currentValue += previousValue;
+    previousValue = currentValue - previousValue;
+    iterationsCounter -= <span class="hljs-number">1</span>;
+  }
+
+  <span class="hljs-keyword">return</span> currentValue;
+}
+<span class="hljs-comment">// 递归</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fibonacciNth</span>(<span class="hljs-params">n</span>) </span>{
+  <span class="hljs-keyword">if</span>(n&lt;=<span class="hljs-number">0</span>){
+    <span class="hljs-keyword">return</span> n
+  }
+  <span class="hljs-keyword">let</span> Memo = []
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;=n;i++){
+    Memo[i]= <span class="hljs-number">-1</span>
+  }
+  <span class="hljs-keyword">return</span> fib(n,Memo)
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(<span class="hljs-params">n,Memo</span>)</span>{
+  <span class="hljs-keyword">if</span>(Memo[n] !== <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> Memo[n]
+  <span class="hljs-keyword">if</span>(n&lt;<span class="hljs-number">2</span>) {
+    Memo[n] = <span class="hljs-number">1</span>
+  }<span class="hljs-keyword">else</span> {
+    Memo[n]=fib( n<span class="hljs-number">-1</span>,Memo)+fib(n<span class="hljs-number">-2</span>,Memo)
+  }
+  <span class="hljs-keyword">return</span> Memo[n]
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/9809555-5c640c7b655de29d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h3 id="-10-">爬楼梯 一共10级楼梯，每次可以走一步或两步，求一共多少种走法</h3>
+<pre><code><span class="hljs-keyword">var</span> fib = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(n)</span></span>{
+  <span class="hljs-keyword">if</span>(n == <span class="hljs-number">1</span>){
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(n==<span class="hljs-number">2</span>){
+    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+  }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(n&gt;<span class="hljs-number">2</span>){
+    <span class="hljs-keyword">return</span> fib(n<span class="hljs-number">-1</span>) + fib(n<span class="hljs-number">-2</span>);
+  }
+}</code></pre><h3 id="-1-3-n-">细胞分裂 1个细胞，一个小时分裂一次，生命周期是3小时，求n小时后容器内，有多少细胞</h3>
+<pre><code><span class="hljs-keyword">function</span> cell<span class="hljs-constructor">Number(<span class="hljs-params">hour</span>)</span>{
+    <span class="hljs-keyword">let</span> firstCycle = <span class="hljs-keyword">function</span> (hour){
+        <span class="hljs-keyword">if</span>(hour===<span class="hljs-number">0</span>){return <span class="hljs-number">1</span>;} <span class="hljs-comment">//初始的那个细胞</span>
+        return first<span class="hljs-constructor">Cycle(<span class="hljs-params">hour</span>-1)</span>+second<span class="hljs-constructor">Cycle(<span class="hljs-params">hour</span>-1)</span>+third<span class="hljs-constructor">Cycle(<span class="hljs-params">hour</span>-1)</span>;
+    }
+    <span class="hljs-keyword">let</span> secondCycle = <span class="hljs-keyword">function</span>(hour){
+        <span class="hljs-keyword">if</span>(hour===<span class="hljs-number">0</span>){return <span class="hljs-number">0</span>;} <span class="hljs-comment">//一个小时之后才会生成</span>
+        return first<span class="hljs-constructor">Cycle(<span class="hljs-params">hour</span>-1)</span>;
+    }
+    <span class="hljs-keyword">let</span>  thirdCycle = <span class="hljs-keyword">function</span>(hour){
+        <span class="hljs-keyword">if</span>(hour===<span class="hljs-number">0</span><span class="hljs-pattern-match"><span class="hljs-operator">||</span>hour<span class="hljs-operator">==</span>=1){return 0;} <span class="hljs-operator">/</span><span class="hljs-operator">/</span>前两小时还没生成
+        return second<span class="hljs-constructor">Cycle(<span class="hljs-params">hour</span>-1)</span>;
+    }
+    return first<span class="hljs-constructor">Cycle(<span class="hljs-params">hour</span>)</span>+second<span class="hljs-constructor">Cycle(<span class="hljs-params">hour</span>)</span>+third<span class="hljs-constructor">Cycle(<span class="hljs-params">hour</span>)</span>
+}
+
+
+</span></code></pre><p>el:2</p>
+<table class="table"><tr>
+<th>第一周期(0h)</th>
+<th align="center">第二周期(1h)</th>
+<th align="center">第三周期(2h) </th>
+</tr>
+<tr>
+<td>a(2)</td>
+<td align="center">+ b(2)</td>
+<td align="center">+ c(2) </td>
+</tr>
+<tr>
+<td>a(1)+b(1)+c(1)</td>
+<td align="center">+ a(1)</td>
+<td align="center">+ b(1) </td>
+</tr>
+<tr>
+<td>a(0)+a(1)</td>
+<td align="center">+ a(0)</td>
+<td align="center">+ a(1) </td>
+</tr>
+<tr>
+<td>a(0)+a(0)</td>
+<td align="center">+ a(0)</td>
+<td align="center">+ a(0) </td>
+</tr>
+<tr>
+<td>1   + 1</td>
+<td align="center">+ 1</td>
+<td align="center">+ 1    </td>
+</tr>
+</table><h2 id="-2-">判断2次方数</h2>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isPowerOfTwo</span>(<span class="hljs-params"><span class="hljs-built_in">number</span></span>)</span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">number</span> &lt; <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }  
+    <span class="hljs-keyword">return</span> (<span class="hljs-built_in">number</span> &amp; (<span class="hljs-built_in">number</span> - <span class="hljs-number">1</span>)) === <span class="hljs-number">0</span>;
+}</code></pre><h2 id="-">素数检测</h2>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">trialDivision</span>(<span class="hljs-params"><span class="hljs-built_in">number</span></span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">number</span> % <span class="hljs-number">1</span> !== <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">number</span> &lt;= <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">number</span> &lt;= <span class="hljs-number">3</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">number</span> % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+
+    <span class="hljs-keyword">const</span> dividerLimit = <span class="hljs-built_in">Math</span>.sqrt(<span class="hljs-built_in">number</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> divider = <span class="hljs-number">3</span>; divider &lt;= dividerLimit; divider += <span class="hljs-number">2</span>) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">number</span> % divider === <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      }
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  }</code></pre><h2 id="-">整数拆分</h2>
+<h3 id="-">拆分为因试和</h3>
+<pre><code><span class="hljs-built_in">n</span>=<span class="hljs-number">1</span>+f(<span class="hljs-built_in">n</span>-<span class="hljs-number">1</span>);
+<span class="hljs-built_in">n</span>=<span class="hljs-number">2</span>+f(<span class="hljs-built_in">n</span>-<span class="hljs-number">2</span>);
+·····
+<span class="hljs-built_in">n</span>=(<span class="hljs-built_in">n</span>-<span class="hljs-number">1</span>)+f(<span class="hljs-number">1</span>);
+<span class="hljs-built_in">n</span>=<span class="hljs-built_in">n</span>+f(<span class="hljs-number">0</span>)</code></pre><p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><mi>n</mi><mi mathvariant="normal">−</mi><mn>1</mn><mo>)</mo><mo>+</mo><mi>f</mi><mo>(</mo><mi>n</mi><mi mathvariant="normal">−</mi><mn>2</mn><mo>)</mo><mo>+</mo><mo>…</mo><mo>…</mo><mo>+</mo><mi>f</mi><mo>(</mo><mn>1</mn><mo>)</mo><mo>+</mo><mi>f</mi><mo>(</mo><mn>0</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">f(n)=f(n−1)+f(n−2)+……+f(1)+f(0)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord">−</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord">−</span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">0</span><span class="mclose">)</span></span></span></span>(其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">f(0)=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>)  公式①</p>
+<p>数学公式推导： 
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>+</mo><mi>f</mi><mo>(</mo><mi>n</mi><mi mathvariant="normal">−</mi><mn>1</mn><mo>)</mo><mo>+</mo><mo>…</mo><mo>…</mo><mo>+</mo><mi>f</mi><mo>(</mo><mn>2</mn><mo>)</mo><mo>+</mo><mi>f</mi><mo>(</mo><mn>1</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">f(n+1)=f(n)+f(n−1)+……+f(2)+f(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord">−</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>  公式②</p>
+<p>由②-①得 
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo>)</mo><mi mathvariant="normal">−</mi><mi>f</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><mi>n</mi><mo>)</mo><mi mathvariant="normal">−</mi><mi>f</mi><mo>(</mo><mn>0</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">f(n+1)−f(n)=f(n)−f(0)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord">−</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mord">−</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">0</span><span class="mclose">)</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>=</mo><mn>2</mn><mi>f</mi><mo>(</mo><mi>n</mi><mo>)</mo><mi mathvariant="normal">−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">f(n+1)=2f(n)−1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mord">−</span><span class="mord">1</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo>)</mo><mi mathvariant="normal">−</mi><mn>1</mn><mo>=</mo><mn>2</mn><mo>[</mo><mi>f</mi><mo>(</mo><mi>n</mi><mo>)</mo><mi mathvariant="normal">−</mi><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">f(n+1)−1=2[f(n)−1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord">−</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mord">−</span><span class="mord">1</span><span class="mclose">]</span></span></span></span></p>
+<p>于是可以解得
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><msup><mn>2</mn><mrow><mo>(</mo><mi>n</mi><mi mathvariant="normal">−</mi><mn>1</mn><mo>)</mo></mrow></msup><mi mathvariant="normal">，</mi><mi>n</mi><mo>&gt;</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">f(n)=2^{(n−1)}，n&gt;=1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.9270999999999999em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathdefault mtight">n</span><span class="mord mtight">−</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>
+<img src="https://upload-images.jianshu.io/upload_images/9809555-2f975a89cfe690b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">integerPartition</span>(<span class="hljs-params"><span class="hljs-built_in">number</span></span>) </span>{
+  <span class="hljs-keyword">let</span> res_num= <span class="hljs-number">0</span>
+  <span class="hljs-keyword">let</span> res = []
+  <span class="hljs-keyword">let</span> p = <span class="hljs-number">0</span>
+  resolve(<span class="hljs-built_in">number</span>)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"total num of res:"</span>,res_num)
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolve</span>(<span class="hljs-params"><span class="hljs-built_in">number</span></span>)</span>{
+    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">number</span>&lt;=<span class="hljs-number">0</span>){
+      <span class="hljs-built_in">console</span>.log(res.slice(<span class="hljs-number">0</span>,p))
+      res_num ++
+    }
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-built_in">number</span>;i++){
+      res[p] = i
+      p++
+      resolve(<span class="hljs-built_in">number</span>-i)
+      p--
+    }
+  } 
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/9809555-028894c12940a223.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png">
+看输出可以发现，112，211，13，31，其实是重复的，其实我们只要保证，所以都按照由大到小排序就能保证不再重复，新加一个参数min_number,限制for循环的初始值，从而达到这个目的，思想跟前面排序的思想类似。</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">integerPartition</span>(<span class="hljs-params"><span class="hljs-built_in">number</span></span>) </span>{
+  <span class="hljs-keyword">let</span> res_num= <span class="hljs-number">0</span>
+  <span class="hljs-keyword">let</span> res = []
+  <span class="hljs-keyword">let</span> p = <span class="hljs-number">0</span>
+  resolve(<span class="hljs-built_in">number</span>,<span class="hljs-number">1</span>)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"total num of res:"</span>,res_num)
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolve</span>(<span class="hljs-params"><span class="hljs-built_in">number</span>, min_number</span>)</span>{
+    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">number</span>&lt;=<span class="hljs-number">0</span>){
+      <span class="hljs-built_in">console</span>.log(res.slice(<span class="hljs-number">0</span>,p))
+      res_num ++
+    }
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=min_number;i&lt;=<span class="hljs-built_in">number</span>;i++){
+      res[p] = i
+      p++
+      resolve(<span class="hljs-built_in">number</span>-i,i)
+      p--
+    }
+  } 
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/9809555-837c058fa3a6b354.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h3 id="-">拆分为因试积</h3>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">integerPartition</span>(<span class="hljs-params"><span class="hljs-built_in">number</span></span>) </span>{
+  <span class="hljs-keyword">let</span> res= []
+  <span class="hljs-keyword">let</span> num = <span class="hljs-number">0</span>
+  <span class="hljs-keyword">let</span> p = <span class="hljs-number">0</span>
+  resolve(<span class="hljs-built_in">number</span>,<span class="hljs-number">2</span>)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"total num of res:"</span>,num)
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolve</span>(<span class="hljs-params"><span class="hljs-built_in">number</span>, min_number</span>)</span>{
+    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">number</span>&lt;<span class="hljs-number">2</span>){
+      num++
+      <span class="hljs-built_in">console</span>.log(res.slice(<span class="hljs-number">0</span>,p))
+    }
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = min_number;i&lt;=<span class="hljs-built_in">number</span>;i++){
+      <span class="hljs-keyword">if</span>(<span class="hljs-built_in">number</span>%i==<span class="hljs-number">0</span>)
+        {
+            res[p]=i;
+            p++; 
+            resolve(<span class="hljs-built_in">number</span>/i,i);
+            p--;        
+        }
+    }
+  }
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/9809555-92ae226b6929d72c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="-">洗牌</h2>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fisherYates</span><span class="hljs-params">(originalArray)</span> </span>{
+  <span class="hljs-keyword">const</span> <span class="hljs-keyword">array</span> = originalArray.slice(<span class="hljs-number">0</span>); <span class="hljs-comment">//不改变原数据</span>
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = (<span class="hljs-keyword">array</span>.length - <span class="hljs-number">1</span>); i &gt; <span class="hljs-number">0</span>; i--) {
+    <span class="hljs-keyword">const</span> randomIndex = Math.floor(Math.random() * (i + <span class="hljs-number">1</span>));
+    [<span class="hljs-keyword">array</span>[i], <span class="hljs-keyword">array</span>[randomIndex]] = [<span class="hljs-keyword">array</span>[randomIndex], <span class="hljs-keyword">array</span>[i]];
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">array</span>;
+}</code></pre><h2 id="-">幂集</h2>
+<h3 id="-">回溯解决(不断将下一个元素添加到子集)</h3>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">powerset</span><span class="hljs-params">(arr)</span>{</span>
+    var ps = [[]];
+    <span class="hljs-keyword">for</span>(var <span class="hljs-built_in">i</span>=<span class="hljs-number">0</span>;<span class="hljs-built_in">i</span>&lt;arr.<span class="hljs-built_in">length</span>;<span class="hljs-built_in">i</span>++){
+        <span class="hljs-keyword">for</span>(var <span class="hljs-built_in">j</span>=<span class="hljs-number">0</span>,len=ps.<span class="hljs-built_in">length</span>;<span class="hljs-built_in">j</span>&lt;len;<span class="hljs-built_in">j</span>++){
+            ps.push(ps[<span class="hljs-built_in">j</span>].concat(arr[<span class="hljs-built_in">i</span>]));
+        }
+    }
+    <span class="hljs-keyword">return</span> ps;
+}</code></pre><h3 id="-">按位解决</h3>
+<p>1代表存在，0代表不存在</p>
+<table class="table"><tr>
+<th>1/0</th>
+<th>abc</th>
+<th>子集</th>
+</tr>
+<tr>
+<td>0</td>
+<td>000</td>
+<td>{}</td>
+</tr>
+<tr>
+<td>1</td>
+<td>001</td>
+<td>{c}</td>
+</tr>
+<tr>
+<td>2</td>
+<td>010</td>
+<td>{b}</td>
+</tr>
+<tr>
+<td>3</td>
+<td>011</td>
+<td>{c,b}</td>
+</tr>
+<tr>
+<td>4</td>
+<td>100</td>
+<td>{a}</td>
+</tr>
+<tr>
+<td>5</td>
+<td>101</td>
+<td>{a,c}</td>
+</tr>
+<tr>
+<td>6</td>
+<td>110</td>
+<td>{a,b}</td>
+</tr>
+<tr>
+<td>7</td>
+<td>111</td>
+<td>{a,b,c}</td>
+</tr>
+</table><h2 id="-">组合求和</h2>
+<pre><code>function combinationSumRecursive(
+  chooseArr,
+  <span class="hljs-built_in">sum</span>,
+  res = [],
+  now = [],
+  start = <span class="hljs-number">0</span>
+) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sum</span> &lt; <span class="hljs-number">0</span>) <span class="hljs-built_in">return</span> res
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sum</span> === <span class="hljs-number">0</span>) {
+    res.<span class="hljs-built_in">push</span>(now.slice())
+    <span class="hljs-built_in">return</span> res;
+  }
+  <span class="hljs-keyword">for</span> (<span class="hljs-built_in">let</span> candidateIndex = start; candidateIndex &lt; chooseArr.<span class="hljs-built_in">length</span>; candidateIndex += <span class="hljs-number">1</span>) {
+    const currentCandidate = chooseArr[candidateIndex]
+    now.<span class="hljs-built_in">push</span>(currentCandidate)
+    combinationSumRecursive(
+      chooseArr,
+      <span class="hljs-built_in">sum</span> - currentCandidate,
+      res,
+      now,
+      candidateIndex
+    )
+    now.<span class="hljs-built_in">pop</span>()
+  }
+  <span class="hljs-built_in">return</span> res
+}</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/9809555-45ce35e716744c24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="-">雨水收集问题</h2>
+<p><img src="https://upload-images.jianshu.io/upload_images/9809555-87301314a06e8a2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dpRainTerraces</span>(<span class="hljs-params">terraces</span>) </span>{
+  <span class="hljs-keyword">let</span> waterAmount = <span class="hljs-number">0</span>;
+
+  <span class="hljs-keyword">const</span> leftMaxLevels = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(terraces.length).fill(<span class="hljs-number">0</span>);
+  <span class="hljs-keyword">const</span> rightMaxLevels = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(terraces.length).fill(<span class="hljs-number">0</span>);
+
+  [leftMaxLevels[<span class="hljs-number">0</span>]] = terraces;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> terraceIndex = <span class="hljs-number">1</span>; terraceIndex &lt; terraces.length; terraceIndex += <span class="hljs-number">1</span>) {
+    leftMaxLevels[terraceIndex] = <span class="hljs-built_in">Math</span>.max(
+      terraces[terraceIndex],
+      leftMaxLevels[terraceIndex - <span class="hljs-number">1</span>],
+    );
+  }
+
+  rightMaxLevels[terraces.length - <span class="hljs-number">1</span>] = terraces[terraces.length - <span class="hljs-number">1</span>];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> terraceIndex = terraces.length - <span class="hljs-number">2</span>; terraceIndex &gt;= <span class="hljs-number">0</span>; terraceIndex -= <span class="hljs-number">1</span>) {
+    rightMaxLevels[terraceIndex] = <span class="hljs-built_in">Math</span>.max(
+      terraces[terraceIndex],
+      rightMaxLevels[terraceIndex + <span class="hljs-number">1</span>],
+    );
+  }
+
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> terraceIndex = <span class="hljs-number">0</span>; terraceIndex &lt; terraces.length; terraceIndex += <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">const</span> currentTerraceBoundary = <span class="hljs-built_in">Math</span>.min(
+      leftMaxLevels[terraceIndex],
+      rightMaxLevels[terraceIndex],
+    );
+    <span class="hljs-keyword">if</span> (currentTerraceBoundary &gt; terraces[terraceIndex]) {
+      waterAmount += currentTerraceBoundary - terraces[terraceIndex];
+    }
+  }
+
+  <span class="hljs-keyword">return</span> waterAmount;
+}</code></pre>
     
 </body>
 </html>

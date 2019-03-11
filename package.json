@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.6.1",
-    "marked": "^0.6.1"
+    "highlight.js": "^9.15.6",
+    "katex": "^0.10.1"
   }
 }
